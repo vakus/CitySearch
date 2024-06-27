@@ -10,11 +10,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{23FA0730-3C72-4813-834E-0E12087799D6}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
+		CityNames.csv = CityNames.csv
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.Service", "CitySearch.Service\CitySearch.Service.csproj", "{6A61E14B-615F-4B4E-A4A0-7EE4242B1411}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DA764E99-B4C4-443F-822C-534D0A55B500}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests Projects", "Tests Projects", "{DA764E99-B4C4-443F-822C-534D0A55B500}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.UnitTest.Service", "CitySearch.UnitTest.Service\CitySearch.UnitTest.Service.csproj", "{AAA270C6-6968-40E6-9E37-68A2B6F8067D}"
 EndProject

@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CitySearch.Contract\CitySearch.Contract.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CityNameLoader\" />
+  </ItemGroup>
+
 </Project>
