@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.Console", "CitySearch.Console\CitySearch.Console.csproj", "{6B951D5B-C405-4AB6-A191-D4630F5C8649}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitySearch.Console", "CitySearch.Console\CitySearch.Console.csproj", "{6B951D5B-C405-4AB6-A191-D4630F5C8649}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.Contract", "CitySearch.Contract\CitySearch.Contract.csproj", "{930272B4-C8B6-40D2-907C-4FB4F19F51AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitySearch.Contract", "CitySearch.Contract\CitySearch.Contract.csproj", "{930272B4-C8B6-40D2-907C-4FB4F19F51AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{23FA0730-3C72-4813-834E-0E12087799D6}"
 	ProjectSection(SolutionItems) = preProject
@@ -13,11 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		CityNames.csv = CityNames.csv
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.Service", "CitySearch.Service\CitySearch.Service.csproj", "{6A61E14B-615F-4B4E-A4A0-7EE4242B1411}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitySearch.Service", "CitySearch.Service\CitySearch.Service.csproj", "{6A61E14B-615F-4B4E-A4A0-7EE4242B1411}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests Projects", "Tests Projects", "{DA764E99-B4C4-443F-822C-534D0A55B500}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.UnitTest.Service", "CitySearch.UnitTest.Service\CitySearch.UnitTest.Service.csproj", "{AAA270C6-6968-40E6-9E37-68A2B6F8067D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitySearch.UnitTest.Service", "CitySearch.UnitTest.Service\CitySearch.UnitTest.Service.csproj", "{AAA270C6-6968-40E6-9E37-68A2B6F8067D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.PerformanceTest.Service", "CitySearch.PerformanceTest.Service\CitySearch.PerformanceTest.Service.csproj", "{4C6CAB46-6F65-41A7-A24B-1E4F7C54E719}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,12 +43,17 @@ Global
 		{AAA270C6-6968-40E6-9E37-68A2B6F8067D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAA270C6-6968-40E6-9E37-68A2B6F8067D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAA270C6-6968-40E6-9E37-68A2B6F8067D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C6CAB46-6F65-41A7-A24B-1E4F7C54E719}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C6CAB46-6F65-41A7-A24B-1E4F7C54E719}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C6CAB46-6F65-41A7-A24B-1E4F7C54E719}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C6CAB46-6F65-41A7-A24B-1E4F7C54E719}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AAA270C6-6968-40E6-9E37-68A2B6F8067D} = {DA764E99-B4C4-443F-822C-534D0A55B500}
+		{4C6CAB46-6F65-41A7-A24B-1E4F7C54E719} = {DA764E99-B4C4-443F-822C-534D0A55B500}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44787A2C-8022-4622-8212-6D763F40581D}
