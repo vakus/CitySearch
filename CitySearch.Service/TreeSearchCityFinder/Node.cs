@@ -4,6 +4,6 @@
     {
         public int Start { get; init; }
         public int Length { get; set; }
-        public IDictionary<char, Node> Children { get; init; } = new Dictionary<char, Node>();
+        public IDictionary<char, Node> Children { get; } = new Dictionary<char, Node>();
     }
 }

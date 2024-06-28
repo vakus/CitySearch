@@ -19,7 +19,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests Projects", "Tests Pro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitySearch.UnitTest.Service", "CitySearch.UnitTest.Service\CitySearch.UnitTest.Service.csproj", "{AAA270C6-6968-40E6-9E37-68A2B6F8067D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.PerformanceTest.Service", "CitySearch.PerformanceTest.Service\CitySearch.PerformanceTest.Service.csproj", "{4C6CAB46-6F65-41A7-A24B-1E4F7C54E719}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitySearch.PerformanceTest.Service", "CitySearch.PerformanceTest.Service\CitySearch.PerformanceTest.Service.csproj", "{4C6CAB46-6F65-41A7-A24B-1E4F7C54E719}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{16778638-01E2-4636-A6CA-342B12BEB88E}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +59,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AAA270C6-6968-40E6-9E37-68A2B6F8067D} = {DA764E99-B4C4-443F-822C-534D0A55B500}
 		{4C6CAB46-6F65-41A7-A24B-1E4F7C54E719} = {DA764E99-B4C4-443F-822C-534D0A55B500}
+		{16778638-01E2-4636-A6CA-342B12BEB88E} = {23FA0730-3C72-4813-834E-0E12087799D6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44787A2C-8022-4622-8212-6D763F40581D}

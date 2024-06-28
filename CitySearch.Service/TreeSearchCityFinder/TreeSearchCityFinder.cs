@@ -21,23 +21,22 @@ public sealed class TreeSearchCityFinder : ICityFinder
             .OrderBy(name => name)
             .ToImmutableList();
 
-        this._root = new Node
+        this._root = GenerateNodeTreeFromCities(this._cities);
+        if (this._cities.Any())
         {
-            Start = 0,
-            Length = this._cities.Count,
-        };
-        this.GenerateNodeTreeFromCities();
-        this._longestCityName = _cities.Max(city => city.Length);
+            this._longestCityName = this._cities.Max(city => city.Length);
+        }
+        
     }
 
     public ICityResult Search(string searchString)
     {
-        if (searchString.Length > _longestCityName)
+        if (searchString.Length > this._longestCityName)
         {
             return TreeSearchCityResult.Empty;
         }
 
-        searchString = _cityNameNormaliser.Normalise(searchString);
+        searchString = this._cityNameNormaliser.Normalise(searchString);
 
         Node? resultNode = this.FindNodeForName(searchString);
 
@@ -50,7 +49,7 @@ public sealed class TreeSearchCityFinder : ICityFinder
         var cityEnd = resultNode.Start + resultNode.Length;
         for (var x = resultNode.Start; x < cityEnd; x++)
         {
-            cityList.Add(_cities[x]);
+            cityList.Add(this._cities[x]);
         }
 
         var letterList = new List<string>(resultNode.Children.Count);
@@ -68,7 +67,7 @@ public sealed class TreeSearchCityFinder : ICityFinder
 
     private Node? FindNodeForName(string cityName)
     {
-        var currentNode = _root;
+        var currentNode = this._root;
 
         for (int i = 0; i < cityName.Length; i++)
         {
@@ -81,12 +80,18 @@ public sealed class TreeSearchCityFinder : ICityFinder
         return currentNode;
     }
 
-    private void GenerateNodeTreeFromCities()
+    internal static Node GenerateNodeTreeFromCities(IList<string> cities)
     {
-        for (var index = 0; index < _cities.Count; index++)
+        var root = new Node
         {
-            var city = _cities[index].AsSpan();
-            var currentNode = _root;
+            Start = 0,
+            Length = cities.Count,
+        };
+
+        for (var index = 0; index < cities.Count; index++)
+        {
+            var city = cities[index].AsSpan();
+            var currentNode = root;
             foreach (var character in city)
             {
                 if (!currentNode.Children.TryGetValue(character, out var node))
@@ -102,5 +107,7 @@ public sealed class TreeSearchCityFinder : ICityFinder
                 currentNode.Length++;
             }
         }
+
+        return root;
     }
 }
