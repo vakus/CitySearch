@@ -23,11 +23,17 @@ while (true)
     Console.WriteLine(JsonConvert.SerializeObject(cityFinder.Search(cityName)));
 }
 
-ServiceProvider CreateServices()
+static ServiceProvider CreateServices()
 {
     var serviceCollection = new ServiceCollection();
-    serviceCollection.AddSingleton<ICityNameLoader, CsvCityNameLoader>();
+    
     serviceCollection.AddSingleton<ICityNameNormaliser, UppercaseInvariantCityNameNormaliser>();
+    serviceCollection.AddSingleton<ICityNameLoader>(services =>
+    {
+        var filename = "CityNames.csv";
+        var nameNormaliser = services.GetRequiredService<ICityNameNormaliser>();
+        return new CsvCityNameLoader(filename, nameNormaliser);
+    });
     serviceCollection.AddSingleton<ICityFinder, TreeSearchCityFinder>();
     return serviceCollection.BuildServiceProvider();
 }

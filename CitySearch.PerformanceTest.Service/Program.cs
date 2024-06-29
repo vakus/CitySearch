@@ -1,6 +1,4 @@
-﻿
-
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using CitySearch;
 using CitySearch.Service.CityNameLoader;
@@ -20,7 +18,7 @@ public class Benchmarks
     [GlobalSetup(Target = nameof(BenchmarkRun))]
     public void Init()
     {
-        finder = new TreeSearchCityFinder(new CsvCityNameLoader(new UppercaseInvariantCityNameNormaliser()),
+        finder = new TreeSearchCityFinder(new CsvCityNameLoader("CityNames.csv", new UppercaseInvariantCityNameNormaliser()),
             new UppercaseInvariantCityNameNormaliser());
     }
 

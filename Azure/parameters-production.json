@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "subscriptionId": {
+            "value": "b9547f5b-c058-4e49-8db6-c01e33f1f841"
+        },
+        "resourceGroupName": {
+            "value": "interview_exercise_rg"
+        },
+        "name": {
+            "value": "InterviewCitySearch"
+        },
+        "location": {
+            "value": "UK South"
+        },
+        "hostingPlanName": {
+            "value": "ASP-interviewexerciserg-a221"
+        },
+        "serverFarmResourceGroup": {
+            "value": "interview_exercise_rg"
+        },
+        "alwaysOn": {
+            "value": false
+        },
+        "ftpsState": {
+            "value": "FtpsOnly"
+        },
+        "sku": {
+            "value": "Basic"
+        },
+        "skuCode": {
+            "value": "B1"
+        },
+        "numberOfWorkers": {
+            "value": "1"
+        },
+        "workerSize": {
+            "value": "0"
+        },
+        "workerSizeId": {
+            "value": "0"
+        },
+        "linuxFxVersion": {
+            "value": "DOTNETCORE|8.0"
+        }
+    }
+}

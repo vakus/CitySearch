@@ -4,18 +4,22 @@ namespace CitySearch.Service.CityNameLoader;
 
 public class CsvCityNameLoader : ICityNameLoader
 {
-    private const string CityNameFile = "CityNames.csv";
+    private readonly string _cityNameFile;
 
     private readonly ICityNameNormaliser _cityNameNormaliser;
 
-    public CsvCityNameLoader(ICityNameNormaliser cityNameNormaliser)
+    public CsvCityNameLoader(string csvFileName, ICityNameNormaliser cityNameNormaliser)
     {
         ArgumentNullException.ThrowIfNull(cityNameNormaliser);
+        ArgumentException.ThrowIfNullOrWhiteSpace(csvFileName);
 
-        _cityNameNormaliser = cityNameNormaliser;
+        this._cityNameNormaliser = cityNameNormaliser;
+        this._cityNameFile = csvFileName;
     }
     public IList<string> Load()
     {
-        return File.ReadAllLines(CityNameFile).Select(_cityNameNormaliser.Normalise).ToList();
+        return File.ReadAllLines(this._cityNameFile)
+            .Select(this._cityNameNormaliser.Normalise)
+            .ToList();
     }
 }
