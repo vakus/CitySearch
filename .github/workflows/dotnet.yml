@@ -24,7 +24,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish CitySearch.Web.Api/CitySearch.Web.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/CitySearchApp --no-restore --no-build -p DebugType=none -p DebugSymbols=false
+      run: dotnet publish CitySearch.Web.Api/CitySearch.Web.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/CitySearchApp --no-restore --no-build
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
