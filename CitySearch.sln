@@ -34,6 +34,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ARM", "ARM", "{D18E9AFE-7F4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.Web.Api", "CitySearch.Web.Api\CitySearch.Web.Api.csproj", "{CE376B4E-5F11-4FB3-9102-B4613912A0B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.IntegrationTest.Web.Api", "CitySearch.IntegrationTest.Web.Api\CitySearch.IntegrationTest.Web.Api.csproj", "{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{CE376B4E-5F11-4FB3-9102-B4613912A0B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE376B4E-5F11-4FB3-9102-B4613912A0B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE376B4E-5F11-4FB3-9102-B4613912A0B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,6 +79,7 @@ Global
 		{4C6CAB46-6F65-41A7-A24B-1E4F7C54E719} = {DA764E99-B4C4-443F-822C-534D0A55B500}
 		{16778638-01E2-4636-A6CA-342B12BEB88E} = {23FA0730-3C72-4813-834E-0E12087799D6}
 		{D18E9AFE-7F4B-46F6-91AD-B3C2DAFE458E} = {23FA0730-3C72-4813-834E-0E12087799D6}
+		{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA} = {DA764E99-B4C4-443F-822C-534D0A55B500}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44787A2C-8022-4622-8212-6D763F40581D}
