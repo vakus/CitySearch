@@ -2,6 +2,7 @@ using System.Reflection;
 using CitySearch;
 using CitySearch.Service.CityNameLoader;
 using CitySearch.Service.CityNameNormaliser;
+using CitySearch.Service.DatasetNormaliser;
 using CitySearch.Service.TreeSearchCityFinder;
 using Microsoft.OpenApi.Models;
 
@@ -15,6 +16,20 @@ builder.Services.AddSingleton<ICityNameLoader>(services =>
     var filename = builder.Configuration.GetConnectionString("CsvCityNameFile");;
     var nameNormaliser = services.GetRequiredService<ICityNameNormaliser>();
     return new CsvCityNameLoader(filename, nameNormaliser);
+});
+
+builder.Services.AddSingleton<NameDatasetNormaliser>();
+builder.Services.AddSingleton<DuplicateDatasetNormaliser>();
+builder.Services.AddSingleton<OrderDatasetNormaliser>();
+builder.Services.AddSingleton<IDatasetNormaliser, AggregateDatasetNormaliser>(services =>
+{
+    var nameDatasetNormaliser = services.GetRequiredService<NameDatasetNormaliser>();
+    var duplicateDatasetNormaliser = services.GetRequiredService<DuplicateDatasetNormaliser>();
+    var orderDatasetNormaliser = services.GetRequiredService<OrderDatasetNormaliser>();
+    return new AggregateDatasetNormaliser(
+        nameDatasetNormaliser,
+        duplicateDatasetNormaliser,
+        orderDatasetNormaliser);
 });
 builder.Services.AddSingleton<ICityFinder, TreeSearchCityFinder>();
 

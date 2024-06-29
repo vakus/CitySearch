@@ -19,7 +19,6 @@ public class CsvCityNameLoader : ICityNameLoader
     public IList<string> Load()
     {
         return File.ReadAllLines(this._cityNameFile)
-            .Select(this._cityNameNormaliser.Normalise)
             .ToList();
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Immutable;
 using CitySearch.Service.CityNameLoader;
 using CitySearch.Service.CityNameNormaliser;
+using CitySearch.Service.DatasetNormaliser;
 
 namespace CitySearch.Service.TreeSearchCityFinder;
 
@@ -11,14 +12,17 @@ public sealed class TreeSearchCityFinder : ICityFinder
     private readonly ICityNameNormaliser _cityNameNormaliser;
     private readonly int _longestCityName;
 
-    public TreeSearchCityFinder(ICityNameLoader cityNameLoader, ICityNameNormaliser cityNameNormaliser)
+    public TreeSearchCityFinder(
+        ICityNameLoader cityNameLoader,
+        ICityNameNormaliser cityNameNormaliser,
+        IDatasetNormaliser datasetNormaliser)
     {
         ArgumentNullException.ThrowIfNull(cityNameNormaliser);
         ArgumentNullException.ThrowIfNull(cityNameLoader);
+        ArgumentNullException.ThrowIfNull(datasetNormaliser);
         
         this._cityNameNormaliser = cityNameNormaliser;
-        this._cities = cityNameLoader.Load()
-            .OrderBy(name => name)
+        this._cities = datasetNormaliser.Normalise(cityNameLoader.Load())
             .ToImmutableList();
 
         this._root = GenerateNodeTreeFromCities(this._cities);

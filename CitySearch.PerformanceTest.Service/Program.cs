@@ -3,6 +3,7 @@ using BenchmarkDotNet.Running;
 using CitySearch;
 using CitySearch.Service.CityNameLoader;
 using CitySearch.Service.CityNameNormaliser;
+using CitySearch.Service.DatasetNormaliser;
 using CitySearch.Service.TreeSearchCityFinder;
 
 BenchmarkRunner.Run<Benchmarks>();
@@ -18,8 +19,14 @@ public class Benchmarks
     [GlobalSetup(Target = nameof(BenchmarkRun))]
     public void Init()
     {
-        finder = new TreeSearchCityFinder(new CsvCityNameLoader("CityNames.csv", new UppercaseInvariantCityNameNormaliser()),
-            new UppercaseInvariantCityNameNormaliser());
+        var nameNormaliser = new UppercaseInvariantCityNameNormaliser();
+        finder = new TreeSearchCityFinder(
+            new CsvCityNameLoader("CityNames.csv", nameNormaliser),
+            nameNormaliser,
+            new AggregateDatasetNormaliser(
+                new NameDatasetNormaliser(nameNormaliser),
+                new DuplicateDatasetNormaliser(),
+                new OrderDatasetNormaliser()));
     }
 
     [Benchmark]

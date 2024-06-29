@@ -1,6 +1,6 @@
-@CitySearch.Web.Api_HostAddress = http://localhost:5063
+@CitySearch.Web.Api_HostAddress = https://localhost:44325
 
-GET {{CitySearch.Web.Api_HostAddress}}/weatherforecast/
+GET {{CitySearch.Web.Api_HostAddress}}/api/CitySearch/string
 Accept: application/json
 
 ###

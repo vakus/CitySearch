@@ -1,5 +1,6 @@
 using CitySearch.Service.CityNameLoader;
 using CitySearch.Service.CityNameNormaliser;
+using CitySearch.Service.DatasetNormaliser;
 using CitySearch.Service.TreeSearchCityFinder;
 using FluentAssertions;
 using Moq;
@@ -13,7 +14,10 @@ namespace CitySearch.UnitTest.Service
         [Fact]
         public void Constructor_ShouldThrow_WhenCityNameLoaderIsMissing()
         {
-            Action action = () => new TreeSearchCityFinder(null, new Mock<ICityNameNormaliser>().Object);
+            Action action = () => new TreeSearchCityFinder(
+                null,
+                new Mock<ICityNameNormaliser>().Object,
+                new Mock<IDatasetNormaliser>().Object);
 
             action.Should().Throw<ArgumentNullException>();
         }
@@ -21,7 +25,21 @@ namespace CitySearch.UnitTest.Service
         [Fact]
         public void Constructor_ShouldThrow_WhenCityNameNormaliserIsMissing()
         {
-            Action action = () => new TreeSearchCityFinder(new Mock<ICityNameLoader>().Object, null);
+            Action action = () => new TreeSearchCityFinder(
+                new Mock<ICityNameLoader>().Object,
+                null,
+                new Mock<IDatasetNormaliser>().Object);
+
+            action.Should().Throw<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void Constructor_ShouldThrow_WhenDatasetNormaliserIsNull()
+        {
+            Action action = () => new TreeSearchCityFinder(
+                new Mock<ICityNameLoader>().Object,
+                new Mock<ICityNameNormaliser>().Object,
+                null);
 
             action.Should().Throw<ArgumentNullException>();
         }
@@ -38,7 +56,7 @@ namespace CitySearch.UnitTest.Service
         public void Search_ShouldReturnNoResults_WhenCityListIsEmpty(string citySearch)
         {
             // arrange
-            var (nameLoaderMock, nameNormaliserMock, finder) = SetupCityFinder(Array.Empty<string>());
+            var (nameLoaderMock, nameNormaliserMock, datasetNormaliserMock, finder) = SetupCityFinder(Array.Empty<string>());
 
             // act
             var result = finder.Search(citySearch);
@@ -50,6 +68,7 @@ namespace CitySearch.UnitTest.Service
 
             nameLoaderMock.Verify(m => m.Load(), Times.Once);
             nameNormaliserMock.Verify(m => m.Normalise(It.IsAny<string>()), Times.AtMostOnce);
+            datasetNormaliserMock.Verify(m => m.Normalise(It.IsAny<IList<string>>()), Times.Once);
         }
 
         [Theory]
@@ -60,7 +79,7 @@ namespace CitySearch.UnitTest.Service
         public void Search_ShouldReturnOneResult_WhenNoSimilarCharactersIsFound(string allCityNames)
         {
             var cities = allCityNames.Split(',');
-            var (nameLoaderMock, nameNormaliserMock, finder) = SetupCityFinder(cities);
+            var (nameLoaderMock, nameNormaliserMock, datasetNormaliserMock, finder) = SetupCityFinder(cities);
 
             foreach (var city in cities)
             {
@@ -89,6 +108,7 @@ namespace CitySearch.UnitTest.Service
 
             nameLoaderMock.Verify(m => m.Load(), Times.Once);
             nameNormaliserMock.Verify(m => m.Normalise(It.IsAny<string>()), Times.AtLeastOnce);
+            datasetNormaliserMock.Verify(m => m.Normalise(It.IsAny<IList<string>>()), Times.Once);
         }
 
         [Theory]
@@ -99,7 +119,7 @@ namespace CitySearch.UnitTest.Service
         public void Search_ShouldReturnAllCities_WhenStartingWithTheSameCharacter(string allCityNames)
         {
             var cities = allCityNames.Split(',');
-            var (nameLoaderMock, nameNormaliserMock, finder) = SetupCityFinder(cities);
+            var (nameLoaderMock, nameNormaliserMock, datasetNormaliserMock, finder) = SetupCityFinder(cities);
 
             var search = allCityNames[..1];
             var result = finder.Search(search);
@@ -113,6 +133,7 @@ namespace CitySearch.UnitTest.Service
                 .And.AllSatisfy(letter => cities.Should().ContainMatch($"{search}{letter}*"));
             nameLoaderMock.Verify(m => m.Load(), Times.Once);
             nameNormaliserMock.Verify(m => m.Normalise(It.IsAny<string>()), Times.Once);
+            datasetNormaliserMock.Verify(m => m.Normalise(It.IsAny<IList<string>>()), Times.Once);
         }
 
         [Theory]
@@ -123,7 +144,7 @@ namespace CitySearch.UnitTest.Service
         public void Search_ShouldReturnNoEntries_WhenCityNameIsNotInDataSet(string search, string allCityNames)
         {
             var cities = allCityNames.Split(',');
-            var (nameLoaderMock, nameNormaliserMock, finder) = SetupCityFinder(cities);
+            var (nameLoaderMock, nameNormaliserMock, datasetNormaliserMock, finder) = SetupCityFinder(cities);
 
             var result = finder.Search(search);
 
@@ -133,6 +154,7 @@ namespace CitySearch.UnitTest.Service
 
             nameLoaderMock.Verify(m => m.Load(), Times.Once);
             nameNormaliserMock.Verify(m => m.Normalise(It.IsAny<string>()), Times.Once);
+            datasetNormaliserMock.Verify(m => m.Normalise(It.IsAny<IList<string>>()), Times.Once);
         }
 
         [Theory]
@@ -162,15 +184,19 @@ namespace CitySearch.UnitTest.Service
             }
         }
 
-        private static (Mock<ICityNameLoader>, Mock<ICityNameNormaliser>, TreeSearchCityFinder) SetupCityFinder(IList<string> cities)
+        private static (Mock<ICityNameLoader>, Mock<ICityNameNormaliser>, Mock<IDatasetNormaliser>, TreeSearchCityFinder) SetupCityFinder(IList<string> cities)
         {
             var nameLoaderMock = new Mock<ICityNameLoader>();
             nameLoaderMock.Setup(m => m.Load()).Returns(cities);
             var nameNormaliserMock = new Mock<ICityNameNormaliser>();
-            nameNormaliserMock.Setup(m => m.Normalise(It.IsAny<string>())).Returns((string city) => city);
-            var finder = new TreeSearchCityFinder(nameLoaderMock.Object, nameNormaliserMock.Object);
+            nameNormaliserMock.Setup(m => m.Normalise(It.IsAny<string>()))
+                .Returns((string city) => city);
+            var datasetNormaliserMock = new Mock<IDatasetNormaliser>();
+            datasetNormaliserMock.Setup(m => m.Normalise(It.IsAny<IList<string>>()))
+                .Returns((IList<string> cities) => cities);
+            var finder = new TreeSearchCityFinder(nameLoaderMock.Object, nameNormaliserMock.Object, datasetNormaliserMock.Object);
 
-            return (nameLoaderMock, nameNormaliserMock, finder);
+            return (nameLoaderMock, nameNormaliserMock, datasetNormaliserMock, finder);
         }
     }
 }
