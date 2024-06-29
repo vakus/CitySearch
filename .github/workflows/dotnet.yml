@@ -1,4 +1,4 @@
-name: Build and Test
+name: CI/CD
 
 on:
   push:
@@ -8,11 +8,11 @@ on:
 
 jobs:
   build:
-
+    name: Build and Test
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v4
+    - name: Download code
+      uses: actions/checkout@v4
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
@@ -24,7 +24,7 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/CitySearchApp
+      run: dotnet publish CitySearch.Web.Api/CitySearch.Web.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/CitySearchApp --no-restore --no-build -p DebugType=none -p DebugSymbols=false
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
@@ -32,15 +32,18 @@ jobs:
         path: ${{env.DOTNET_ROOT}}/CitySearchApp
 
   deploy-arm:
+    name: Deploy Azure ARM resource
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - uses: actions/checkout@v4
-      - uses: azure/login@v2
+      - name: Download code
+        uses: actions/checkout@v4
+      - name: Azure Authenticate
+        uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Run ARM Deploy
+      - name: Azure Deploy ARM resources
         uses: azure/arm-deploy@v2
         with:
           subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
@@ -49,6 +52,7 @@ jobs:
           parameters: ./Azure/parameters-production.json
 
   deploy:
+    name: Deploy Web API to Azure resource
     runs-on: ubuntu-latest
     needs: deploy-arm
     environment:
