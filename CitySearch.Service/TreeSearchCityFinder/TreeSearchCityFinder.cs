@@ -35,38 +35,7 @@ public sealed class TreeSearchCityFinder : ICityFinder
 
     public ICityResult Search(string searchString)
     {
-        if (searchString.Length > this._longestCityName)
-        {
-            return TreeSearchCityResult.Empty;
-        }
-
-        searchString = this._cityNameNormaliser.Normalise(searchString);
-
-        Node? resultNode = this.FindNodeForName(searchString);
-
-        if (resultNode is null)
-        {
-            return TreeSearchCityResult.Empty;
-        }
-
-        var cityList = new List<string>(resultNode.Length);
-        var cityEnd = resultNode.Start + resultNode.Length;
-        for (var x = resultNode.Start; x < cityEnd; x++)
-        {
-            cityList.Add(this._cities[x]);
-        }
-
-        var letterList = new List<string>(resultNode.Children.Count);
-        foreach (var key in resultNode.Children.Keys)
-        {
-            letterList.Add(key.ToString());
-        }
-
-        return new TreeSearchCityResult()
-        {
-            NextCities = cityList,
-            NextLetters = letterList,
-        };
+        return TreeSearchCityResult.Empty;
     }
 
     private Node? FindNodeForName(string cityName)
