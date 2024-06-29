@@ -12,7 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ICityNameNormaliser, UppercaseInvariantCityNameNormaliser>();
 builder.Services.AddSingleton<ICityNameLoader>(services =>
 {
-    var filename = "../CityNames.csv";
+    var filename = builder.Configuration.GetConnectionString("CsvCityNameFile");;
     var nameNormaliser = services.GetRequiredService<ICityNameNormaliser>();
     return new CsvCityNameLoader(filename, nameNormaliser);
 });
