@@ -34,6 +34,7 @@ jobs:
   deploy-arm:
     name: Deploy Azure ARM resource
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     needs: build
     steps:
       - name: Download code
@@ -54,6 +55,7 @@ jobs:
   deploy:
     name: Deploy Web API to Azure resource
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     needs: deploy-arm
     environment:
       name: 'production'
