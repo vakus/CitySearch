@@ -43,7 +43,7 @@ public sealed class TreeSearchCityFinder : ICityFinder
 
         searchString = this._cityNameNormaliser.Normalise(searchString);
 
-        Node? resultNode = this.FindNodeForName(searchString);
+        var resultNode = this.FindNodeForName(searchString);
 
         if (resultNode is null)
         {
@@ -63,7 +63,7 @@ public sealed class TreeSearchCityFinder : ICityFinder
             letterList.Add(key.ToString());
         }
 
-        return new TreeSearchCityResult()
+        return new TreeSearchCityResult
         {
             NextCities = cityList,
             NextLetters = letterList,

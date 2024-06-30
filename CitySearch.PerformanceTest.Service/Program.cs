@@ -1,6 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using CitySearch;
 using CitySearch.Service.CityNameLoader;
 using CitySearch.Service.CityNameNormaliser;
 using CitySearch.Service.DatasetNormaliser;
@@ -11,7 +10,7 @@ BenchmarkRunner.Run<Benchmarks>();
 [MemoryDiagnoser]
 public class Benchmarks
 {
-    private ICityFinder finder;
+    private TreeSearchCityFinder _finder;
 
     [Params("LA", "LOS", "GDA", "LON", "ZA", "J", "F")]
     public string CityPrefix { get; set; }
@@ -20,8 +19,8 @@ public class Benchmarks
     public void Init()
     {
         var nameNormaliser = new UppercaseInvariantCityNameNormaliser();
-        finder = new TreeSearchCityFinder(
-            new CsvCityNameLoader("CityNames.csv", nameNormaliser),
+        this._finder = new TreeSearchCityFinder(
+            new CsvCityNameLoader("CityNames.csv"),
             nameNormaliser,
             new AggregateDatasetNormaliser(
                 new NameDatasetNormaliser(nameNormaliser),
@@ -31,6 +30,6 @@ public class Benchmarks
     [Benchmark]
     public void BenchmarkRun()
     {
-        finder.Search(CityPrefix);
+        this._finder.Search(this.CityPrefix);
     }
 }

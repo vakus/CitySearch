@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		CityNames.csv = CityNames.csv
+		readme.md = readme.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitySearch.Service", "CitySearch.Service\CitySearch.Service.csproj", "{6A61E14B-615F-4B4E-A4A0-7EE4242B1411}"
@@ -28,13 +29,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{16778638-01E2-
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ARM", "ARM", "{D18E9AFE-7F4B-46F6-91AD-B3C2DAFE458E}"
 	ProjectSection(SolutionItems) = preProject
-		Azure\template.json = Azure\template.json
 		Azure\parameters-production.json = Azure\parameters-production.json
+		Azure\template.json = Azure\template.json
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.Web.Api", "CitySearch.Web.Api\CitySearch.Web.Api.csproj", "{CE376B4E-5F11-4FB3-9102-B4613912A0B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitySearch.Web.Api", "CitySearch.Web.Api\CitySearch.Web.Api.csproj", "{CE376B4E-5F11-4FB3-9102-B4613912A0B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.IntegrationTest.Web.Api", "CitySearch.IntegrationTest.Web.Api\CitySearch.IntegrationTest.Web.Api.csproj", "{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitySearch.IntegrationTest.Web.Api", "CitySearch.IntegrationTest.Web.Api\CitySearch.IntegrationTest.Web.Api.csproj", "{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitySearch.Acceptance.Service", "CitySearch.Acceptance.Service\CitySearch.Acceptance.Service.csproj", "{4B1D859F-EDB1-4E8A-A477-4F57A9F7D52B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -70,6 +73,10 @@ Global
 		{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B1D859F-EDB1-4E8A-A477-4F57A9F7D52B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B1D859F-EDB1-4E8A-A477-4F57A9F7D52B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B1D859F-EDB1-4E8A-A477-4F57A9F7D52B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B1D859F-EDB1-4E8A-A477-4F57A9F7D52B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -80,6 +87,7 @@ Global
 		{16778638-01E2-4636-A6CA-342B12BEB88E} = {23FA0730-3C72-4813-834E-0E12087799D6}
 		{D18E9AFE-7F4B-46F6-91AD-B3C2DAFE458E} = {23FA0730-3C72-4813-834E-0E12087799D6}
 		{4D03B3CA-35A2-4CC3-89E5-7B8992EE74AA} = {DA764E99-B4C4-443F-822C-534D0A55B500}
+		{4B1D859F-EDB1-4E8A-A477-4F57A9F7D52B} = {DA764E99-B4C4-443F-822C-534D0A55B500}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {44787A2C-8022-4622-8212-6D763F40581D}

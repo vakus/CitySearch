@@ -7,15 +7,12 @@ using CitySearch.Service.TreeSearchCityFinder;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
 builder.Services.AddSingleton<ICityNameNormaliser, UppercaseInvariantCityNameNormaliser>();
 builder.Services.AddSingleton<ICityNameLoader>(services =>
 {
-    var filename = builder.Configuration.GetConnectionString("CsvCityNameFile");;
-    var nameNormaliser = services.GetRequiredService<ICityNameNormaliser>();
-    return new CsvCityNameLoader(filename, nameNormaliser);
+    var filename = builder.Configuration.GetConnectionString("CsvCityNameFile");
+    ArgumentException.ThrowIfNullOrWhiteSpace(filename);
+    return new CsvCityNameLoader(filename);
 });
 
 builder.Services.AddSingleton<NameDatasetNormaliser>();
@@ -32,7 +29,7 @@ builder.Services.AddSingleton<ICityFinder, TreeSearchCityFinder>();
 
 builder.Services.AddControllers()
     .AddControllersAsServices();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
@@ -49,7 +46,6 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -71,6 +67,8 @@ app.Run();
 
 
 // make implicit Program class for test projects to be able to access it
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 public partial class Program
 {
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

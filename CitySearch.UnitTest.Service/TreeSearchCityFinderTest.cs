@@ -5,8 +5,6 @@ using CitySearch.Service.TreeSearchCityFinder;
 using FluentAssertions;
 using Moq;
 
-// ReSharper disable StringLiteralTypo
-
 namespace CitySearch.UnitTest.Service
 {
     public class TreeSearchCityFinderTest

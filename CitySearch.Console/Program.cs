@@ -29,12 +29,7 @@ static ServiceProvider CreateServices()
     var serviceCollection = new ServiceCollection();
     
     serviceCollection.AddSingleton<ICityNameNormaliser, UppercaseInvariantCityNameNormaliser>();
-    serviceCollection.AddSingleton<ICityNameLoader>(services =>
-    {
-        var filename = "CityNames.csv";
-        var nameNormaliser = services.GetRequiredService<ICityNameNormaliser>();
-        return new CsvCityNameLoader(filename, nameNormaliser);
-    });
+    serviceCollection.AddSingleton<ICityNameLoader>(new CsvCityNameLoader("CityNames.csv"));
     serviceCollection.AddSingleton<NameDatasetNormaliser>();
     serviceCollection.AddSingleton<DuplicateDatasetNormaliser>();
     serviceCollection.AddSingleton<IDatasetNormaliser, AggregateDatasetNormaliser>(services =>
