@@ -37,16 +37,13 @@ static ServiceProvider CreateServices()
     });
     serviceCollection.AddSingleton<NameDatasetNormaliser>();
     serviceCollection.AddSingleton<DuplicateDatasetNormaliser>();
-    serviceCollection.AddSingleton<OrderDatasetNormaliser>();
     serviceCollection.AddSingleton<IDatasetNormaliser, AggregateDatasetNormaliser>(services =>
     {
         var nameDatasetNormaliser = services.GetRequiredService<NameDatasetNormaliser>();
         var duplicateDatasetNormaliser = services.GetRequiredService<DuplicateDatasetNormaliser>();
-        var orderDatasetNormaliser = services.GetRequiredService<OrderDatasetNormaliser>();
         return new AggregateDatasetNormaliser(
             nameDatasetNormaliser,
-            duplicateDatasetNormaliser,
-            orderDatasetNormaliser);
+            duplicateDatasetNormaliser);
     });
     serviceCollection.AddSingleton<ICityFinder, TreeSearchCityFinder>();
     return serviceCollection.BuildServiceProvider();

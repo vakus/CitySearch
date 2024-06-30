@@ -23,6 +23,7 @@ public sealed class TreeSearchCityFinder : ICityFinder
         
         this._cityNameNormaliser = cityNameNormaliser;
         this._cities = datasetNormaliser.Normalise(cityNameLoader.Load())
+            .OrderBy(city => city)
             .ToImmutableList();
 
         this._root = GenerateNodeTreeFromCities(this._cities);

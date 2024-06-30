@@ -158,6 +158,29 @@ namespace CitySearch.UnitTest.Service
         }
 
         [Theory]
+        [InlineData("LON", "LONDON,BERLIN,LONDRINA")]
+        [InlineData("WAR", "WARANGAL,JOANE,WARSAW,ASTLEY,WARMINSTER")]
+        [InlineData("A", "ATKINSON,BYDGOSZCZ,ARTEMISA,BRUSSELS,ASZOD,BRYANT,ASTORIA")]
+        public void Search_ShouldReturnNoEntries_WherePrefixIsIncorrect(string search, string allCityNames)
+        {
+            var cities = allCityNames.Split(',');
+            var (nameLoaderMock, nameNormaliserMock, datasetNormaliserMock, finder) = SetupCityFinder(cities);
+
+            var result = finder.Search(search);
+
+            result.Should().NotBeNull();
+            result.NextCities.Should()
+                .NotBeEmpty()
+                .And.AllSatisfy(city => city.Should().StartWithEquivalentOf(search));
+            result.NextLetters.Should()
+                .NotBeEmpty();
+
+            nameLoaderMock.Verify(m => m.Load(), Times.Once);
+            nameNormaliserMock.Verify(m => m.Normalise(It.IsAny<string>()), Times.Once);
+            datasetNormaliserMock.Verify(m => m.Normalise(It.IsAny<IList<string>>()), Times.Once);
+        }
+
+        [Theory]
         [InlineData("LONDON")]
         [InlineData("TEHRAN")]
         [InlineData("FAISALABAD")]

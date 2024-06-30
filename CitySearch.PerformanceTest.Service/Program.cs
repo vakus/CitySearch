@@ -25,8 +25,7 @@ public class Benchmarks
             nameNormaliser,
             new AggregateDatasetNormaliser(
                 new NameDatasetNormaliser(nameNormaliser),
-                new DuplicateDatasetNormaliser(),
-                new OrderDatasetNormaliser()));
+                new DuplicateDatasetNormaliser()));
     }
 
     [Benchmark]

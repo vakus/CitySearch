@@ -20,16 +20,13 @@ builder.Services.AddSingleton<ICityNameLoader>(services =>
 
 builder.Services.AddSingleton<NameDatasetNormaliser>();
 builder.Services.AddSingleton<DuplicateDatasetNormaliser>();
-builder.Services.AddSingleton<OrderDatasetNormaliser>();
 builder.Services.AddSingleton<IDatasetNormaliser, AggregateDatasetNormaliser>(services =>
 {
     var nameDatasetNormaliser = services.GetRequiredService<NameDatasetNormaliser>();
     var duplicateDatasetNormaliser = services.GetRequiredService<DuplicateDatasetNormaliser>();
-    var orderDatasetNormaliser = services.GetRequiredService<OrderDatasetNormaliser>();
     return new AggregateDatasetNormaliser(
         nameDatasetNormaliser,
-        duplicateDatasetNormaliser,
-        orderDatasetNormaliser);
+        duplicateDatasetNormaliser);
 });
 builder.Services.AddSingleton<ICityFinder, TreeSearchCityFinder>();
 
